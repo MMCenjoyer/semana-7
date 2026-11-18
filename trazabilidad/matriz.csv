@@ -1,0 +1,5 @@
+requisito,descripcion,caso_de_uso,clase_metodo,prueba
+RF-01,Buscar libros por título,CU-01,CL-01 Biblioteca.buscar,PR-01
+RF-02,Registrar préstamo de libro disponible,CU-02,CL-01 Biblioteca.prestar,PR-02
+RF-03,Registrar devolución,CU-03,CL-01 Biblioteca.devolver,PR-03
+RF-04,Consultar préstamos activos,CU-04,CL-01 Biblioteca.consultar,PR-04
