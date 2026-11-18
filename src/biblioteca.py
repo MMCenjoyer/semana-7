@@ -1,4 +1,4 @@
-"""CL-01 Biblioteca, CL-02 Libro, CL-03 Prestamo (v1.0)."""
+"""CL-01 Biblioteca, CL-02 Libro, CL-03 Prestamo (v1.1)."""
 from dataclasses import dataclass
 
 
@@ -21,6 +21,8 @@ class Prestamo:                   # CL-03
 
 
 class Biblioteca:                 # CL-01
+    MAX_PRESTAMOS_ACTIVOS = 3     # RB-01
+
     def __init__(self, libros):
         self.libros = {l.id: l for l in libros}
         self.prestamos = []
@@ -30,6 +32,9 @@ class Biblioteca:                 # CL-01
 
     def prestar(self, estudiante_id, libro_id):                # RF-02
         libro = self.libros[libro_id]
+        activos = len(self.consultar(estudiante_id))
+        if activos >= self.MAX_PRESTAMOS_ACTIVOS:                # RF-05
+            raise BibliotecaError("Máximo tres préstamos activos")
         if not libro.disponible:
             raise BibliotecaError("Libro no disponible")
         libro.disponible = False
