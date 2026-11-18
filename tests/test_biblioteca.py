@@ -25,6 +25,17 @@ class TestBiblioteca(unittest.TestCase):
         b = nueva(); b.prestar("E1", 1); b.prestar("E1", 2)
         self.assertEqual(len(b.consultar("E1")), 2)
 
+    def test_pr05_limite_tres(self):                             # RF-05 (CR-001)
+        b = nueva()
+        for i in (1, 2, 3):
+            b.prestar("E1", i)
+        with self.assertRaises(BibliotecaError):
+            b.prestar("E1", 4)
+        self.assertTrue(b.libros[4].disponible)                  # inventario intacto
+        b.devolver("E1", 1)
+        b.prestar("E1", 4)                                       # tras devolver, se acepta
+        self.assertEqual(len(b.consultar("E1")), 3)
+
 
 if __name__ == "__main__":
     unittest.main()
